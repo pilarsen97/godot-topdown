@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://q0dn6nyfbrwf"]
+
+[ext_resource type="Texture2D" uid="uid://csm1f0ksw722i" path="res://assets/textures/weapons/weapon_regular_sword.png" id="1_dbv0u"]
+
+[node name="AttackAbility" type="Node2D" unique_id=1577033808]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1743825153]
+texture = ExtResource("1_dbv0u")

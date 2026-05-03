@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://067nxrap8et"]
+
+[ext_resource type="PackedScene" uid="uid://d37vd2ud41eym" path="res://src/levels/level_01/level_01.tscn" id="1_dgir3"]
+[ext_resource type="PackedScene" uid="uid://cctuddexahcs4" path="res://src/entities/player/player.tscn" id="2_aloi7"]
+[ext_resource type="PackedScene" uid="uid://nixq5b6lm7tx" path="res://src/entities/imp/imp.tscn" id="3_aloi7"]
+
+[node name="World" type="Node" unique_id=1663257591]
+
+[node name="Level_01" parent="." unique_id=2007130358 instance=ExtResource("1_dgir3")]
+
+[node name="Player" parent="." unique_id=1620218492 instance=ExtResource("2_aloi7")]
+position = Vector2(320, 180)
+
+[node name="Imp" parent="." unique_id=562335351 instance=ExtResource("3_aloi7")]
+position = Vector2(231, 172)
