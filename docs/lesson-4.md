@@ -76,3 +76,11 @@ git commit -m "lesson-4: attack ability scene (static visual)"
 - Если меч огромный — у спрайта по умолчанию фильтр texture filter
   включает сглаживание. Для пиксель-арта в `Project Settings → Rendering →
   Textures` ставим `Default Texture Filter = Nearest`.
+
+---
+
+## ⚙️ refactor/lesson-4
+
+В этом уроке мы только рисуем сцену меча — кода нет, поэтому
+никаких новых архитектурных правок. Накопленный рефактор из
+прошлых уроков (типы, слои, кэш игрока в Imp) уже на месте.

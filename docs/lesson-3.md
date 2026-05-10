@@ -103,3 +103,41 @@ git commit -m "lesson-3: imp chases player"
 Если продублировать Imp 50 раз (Ctrl+D), игра начнёт подтормаживать.
 Это будет наш аргумент, чтобы переписать на кэш в `_ready()` —
 урок 4 начнём именно с этого.
+
+---
+
+## ⚙️ refactor/lesson-3
+
+Здесь главное архитектурное улучшение — **кэшируем игрока в `_ready()`**:
+
+```gdscript
+extends CharacterBody2D
+
+@export var max_speed: float = 80.0
+
+var _player: Node2D = null
+
+
+func _ready() -> void:
+    _player = get_tree().get_first_node_in_group("player") as Node2D
+
+
+func _physics_process(_delta: float) -> void:
+    velocity = max_speed * _direction_to_player()
+    move_and_slide()
+
+
+func _direction_to_player() -> Vector2:
+    if _player == null:
+        return Vector2.ZERO
+    return (_player.global_position - global_position).normalized()
+```
+
+**Что поменялось:**
+- `_process` → **`_physics_process`** (как везде).
+- Поиск игрока — **один раз в `_ready()`**, потом в переменной `_player`.
+  С 50 врагами игра не тормозит (в наивной — тормозит).
+- Все числа типизированы и `@export`.
+- `collision_layer = 2` (`enemy`) — Imp живёт на слое врагов.
+- Подчёркивание у `_player` и `_direction_to_player` — конвенция Godot:
+  «это приватное, снаружи не трогать».
