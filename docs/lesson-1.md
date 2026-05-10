@@ -153,3 +153,38 @@ git commit -m "lesson-1: player walks"
 - Если герой не двигается — проверить Input Map (опечатка в названиях
   действий) и что `Main Scene` указывает на player.tscn.
 - Если кадры анимации перепутаны — порядок в SpriteFrames важен.
+
+---
+
+## ⚙️ refactor/lesson-1 (для самостоятельных)
+
+В ветке `refactor/lesson-1` тот же урок, но код сразу правильный:
+
+```gdscript
+extends CharacterBody2D
+
+@export var max_speed: float = 200.0
+
+
+func _physics_process(_delta: float) -> void:
+    var direction := _movement_vector().normalized()
+    velocity = max_speed * direction
+    move_and_slide()
+
+
+func _movement_vector() -> Vector2:
+    var x := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+    var y := Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+    return Vector2(x, y)
+```
+
+**Что поменялось и зачем:**
+- `_process` → **`_physics_process`** — физика обновляется фиксированно
+  60 раз в секунду, не зависит от FPS машины.
+- `var max_speed = 200` → **`@export var max_speed: float = 200.0`** —
+  редактируется из инспектора, нельзя случайно положить туда строку.
+- `: Vector2`, `:= ` — **типы**: компилятор ловит опечатки, IDE подсказывает.
+- В `project.godot` сразу заводим **именованные слои** (player/enemy/...).
+- `collision_layer = 1` (`player`) у Player — он живёт на своём слое.
+
+Эти правила — на всю серию. Дальше они только добавляются.
