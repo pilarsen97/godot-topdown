@@ -169,8 +169,38 @@ extends Node
 
 signal spawn_in_level_requested(scene: PackedScene, position: Vector2)
 ```
-И регистрируем в `Project Settings → AutoLoad` под именем `EventBus`.
+
+### Регистрируем как AutoLoad (пошагово)
+
 **AutoLoad** = синглтон, глобально доступный из любого скрипта.
+Это значит: в любом `.gd` можно написать `EventBus.something()`,
+не делая `get_node(...)`.
+
+Шаги в Godot 4.6:
+1. **Project → Project Settings…** (верхнее меню).
+2. Сверху вкладки `General | Localization | Input Map | Plugins | Autoload | Shader Globals`.
+   Кликни **Autoload**.
+3. Поле **Path** (с иконкой папки) → выбери `res://src/autoload/event_bus.gd`.
+4. Поле **Node Name** заполнится само как `EventBus`. Если нет —
+   впиши вручную **ровно** `EventBus` (большая E, большая B —
+   GDScript регистрозависим, ошибка убьёт пол-урока).
+5. Жми кнопку **Add** справа.
+6. В таблице ниже появится строка
+   `EventBus / res://src/autoload/event_bus.gd / Global Singleton ✔`.
+   Галочка `Global Singleton` (Enabled) должна стоять.
+7. **Close**.
+
+**Проверка:** в любом скрипте набери `EventBus.` — Godot должен
+предложить автодополнение `spawn_in_level_requested`. Если предложил —
+синглтон зарегистрирован.
+
+После этого в `project.godot` появится секция:
+```
+[autoload]
+
+EventBus="*res://src/autoload/event_bus.gd"
+```
+Звёздочка `*` = «синглтон, доступен глобально».
 
 ### `attack_controller.gd`
 ```gdscript
