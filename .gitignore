@@ -1,0 +1,20 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# OS / editor garbage
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Локальные экспорты
+/build/
+/export/
+/exports/
+
+# Сырые ассеты (если заведёте /_raw для исходников, не для res://)
+/_raw/
+
+# ВАЖНО: НЕ игнорируем *.import и *.uid — они нужны в репо,
+# иначе у других участников ломаются ссылки на ресурсы.

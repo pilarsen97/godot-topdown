@@ -1,0 +1,43 @@
+[gd_scene load_steps=12 format=3 uid="uid://cctuddexahcs4"]
+
+[ext_resource type="Script" uid="uid://c088gbfjj5p5h" path="res://src/entities/player/player.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://c4lwd518ix7lm" path="res://assets/textures/player/knight_f_idle_anim_f0.png" id="2_idle0"]
+[ext_resource type="Texture2D" uid="uid://bao63hfynegea" path="res://assets/textures/player/knight_f_idle_anim_f1.png" id="3_idle1"]
+[ext_resource type="Texture2D" uid="uid://tg8yioxswinr" path="res://assets/textures/player/knight_f_idle_anim_f2.png" id="4_idle2"]
+[ext_resource type="Texture2D" uid="uid://doerpfrdd3vth" path="res://assets/textures/player/knight_f_idle_anim_f3.png" id="5_idle3"]
+[ext_resource type="Texture2D" uid="uid://p8gqg0hiptnj" path="res://assets/textures/player/knight_f_run_anim_f0.png" id="6_run0"]
+[ext_resource type="Texture2D" uid="uid://difl42snamyjm" path="res://assets/textures/player/knight_f_run_anim_f1.png" id="7_run1"]
+[ext_resource type="Texture2D" uid="uid://bpshh4o16cl06" path="res://assets/textures/player/knight_f_run_anim_f2.png" id="8_run2"]
+[ext_resource type="Texture2D" uid="uid://cyv6x8b6dgwj6" path="res://assets/textures/player/knight_f_run_anim_f3.png" id="9_run3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1"]
+animations = [{
+"frames": [{"duration": 1.0, "texture": ExtResource("2_idle0")}, {"duration": 1.0, "texture": ExtResource("3_idle1")}, {"duration": 1.0, "texture": ExtResource("4_idle2")}, {"duration": 1.0, "texture": ExtResource("5_idle3")}],
+"loop": true,
+"name": &"Idle",
+"speed": 7.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("6_run0")}, {"duration": 1.0, "texture": ExtResource("7_run1")}, {"duration": 1.0, "texture": ExtResource("8_run2")}, {"duration": 1.0, "texture": ExtResource("9_run3")}],
+"loop": true,
+"name": &"Run",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 5.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 0
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -14)
+sprite_frames = SubResource("SpriteFrames_1")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
