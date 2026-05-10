@@ -47,3 +47,25 @@
 git diff lesson-3 refactor/lesson-3 -- src/entities/imp/imp.gd
 git diff lesson-6 refactor/lesson-6 -- src/levels/
 ```
+
+## Шпаргалка
+
+`docs/TROUBLESHOOTING.md` (есть в каждой `refactor/lesson-N` начиная с 5) —
+типовые проблемы, переключение веток, сброс кэша Godot, ошибки EventBus,
+битовые значения слоёв коллизий.
+
+Если возникла «Не удалось загрузить сцену из-за отсутствия зависимостей» —
+сразу туда.
+
+## Переключение веток
+
+```bash
+git switch refactor/lesson-7        # переключиться на конкретный урок
+rm -rf .godot                       # сбросить кэш импортов Godot
+# открыть проект в Godot заново → подождать "Importing..."
+```
+
+Полезный алиас в `~/.zshrc`:
+```bash
+godot-clean() { rm -rf .godot && open -a Godot . ; }
+```
