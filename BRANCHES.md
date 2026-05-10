@@ -13,7 +13,7 @@
 | `lesson-5` | AnimationPlayer + AttackController с автоспавном |
 | `lesson-6` | Слои коллизий, имена слоёв, чистка проекта |
 
-## Серия `refactor/lesson-1` … `refactor/lesson-6` — правильная архитектура
+## Серия `refactor/lesson-1` … `refactor/lesson-9` — правильная архитектура
 То же, но с архитектурными правилами с самого начала.
 
 | Ветка | Что добавляется поверх |
@@ -24,6 +24,9 @@
 | `refactor/lesson-4` | (без новых правок — кода нет) |
 | `refactor/lesson-5` | **EventBus** + контейнер `Spawned` в уровне |
 | `refactor/lesson-6` | **World как точка входа**: Player в World, Imp в Level |
+| `refactor/lesson-7` | Компоненты **Health / Hitbox / Hurtbox**, имп умирает от меча |
+| `refactor/lesson-8` | **HUD** (CanvasLayer + ProgressBar), урон по игроку, рестарт по смерти |
+| `refactor/lesson-9` | **WaveData** Resource + спавнер волн вокруг игрока |
 
 ## Где брать методичку
 
