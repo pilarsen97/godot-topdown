@@ -61,7 +61,7 @@ animations = [{
 radius = 5.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1620218492 groups=["player"]]
-collision_layer = 0
+collision_layer = 1
 script = ExtResource("1_tk761")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=358464175]

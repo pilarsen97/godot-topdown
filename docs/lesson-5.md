@@ -149,3 +149,52 @@ git commit -m "lesson-5: attack auto-spawn via timer"
    Тоже на уроке 6.
 
 Эти три долга — основа следующего урока.
+
+---
+
+## ⚙️ refactor/lesson-5 — главный архитектурный шаг
+
+В наивной версии `attack_controller.gd` делает так:
+```gdscript
+player.get_parent().add_child(attack_instance)
+```
+Это **антипаттерн**: способность лезет к родителю игрока. Если завтра
+структура сцены поменяется — всё сломается.
+
+В refactor-версии заводим **EventBus** — глобальный «громкоговоритель»:
+
+### `src/autoload/event_bus.gd`
+```gdscript
+extends Node
+
+signal spawn_in_level_requested(scene: PackedScene, position: Vector2)
+```
+И регистрируем в `Project Settings → AutoLoad` под именем `EventBus`.
+**AutoLoad** = синглтон, глобально доступный из любого скрипта.
+
+### `attack_controller.gd`
+```gdscript
+extends Node
+
+@export var attack_ability: PackedScene
+
+
+func _on_timer_timeout() -> void:
+    if attack_ability == null:
+        return
+    var player := get_tree().get_first_node_in_group("player") as Node2D
+    if player == null:
+        return
+    EventBus.spawn_in_level_requested.emit(attack_ability, player.global_position)
+```
+
+### Контейнер `Spawned` в уровне
+В `level_01.tscn` рядом с Player добавляем пустой узел **`Spawned`** (Node).
+Это «коробка» для всего временного. На следующем уроке `World.gd` будет
+ловить сигнал EventBus и класть атаку именно сюда.
+
+### Что мы выиграли
+- Контроллер атаки **ничего не знает** про уровень/мир.
+- Завтра босс захочет стрелять — подключится к тому же сигналу,
+  никто ничего не переписывает.
+- Все спавны идут через одно место — легко логировать, паузить, отлаживать.

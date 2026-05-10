@@ -51,7 +51,7 @@ animations = [{
 radius = 4.0
 
 [node name="Imp" type="CharacterBody2D" unique_id=562335351]
-collision_layer = 0
+collision_layer = 2
 script = ExtResource("1_g1alo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=811835063]
