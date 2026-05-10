@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://bs0y32nn1euw2" path="res://src/entities/player/abilities/attack/attack_controller.gd" id="1_p1vso"]
 [ext_resource type="PackedScene" uid="uid://q0dn6nyfbrwf" path="res://src/entities/player/abilities/attack/attack_ability.tscn" id="2_b8xdg"]
 
-[node name="AttackController" type="Node" unique_id=1545562974]
+[node name="AttackController" type="Node"]
 script = ExtResource("1_p1vso")
 attack_ability = ExtResource("2_b8xdg")
 
-[node name="Timer" type="Timer" parent="." unique_id=948509460]
+[node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
 

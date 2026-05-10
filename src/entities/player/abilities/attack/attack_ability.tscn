@@ -52,6 +52,9 @@ _data = {
 &"attack_animation": SubResource("Animation_attack")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
+radius = 18.0
+
 [node name="AttackAbility" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -61,9 +64,6 @@ offset = Vector2(0, -10)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {"": SubResource("AnimationLibrary_main")}
 autoplay = "attack_animation"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
-radius = 18.0
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 4

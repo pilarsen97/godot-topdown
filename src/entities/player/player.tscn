@@ -60,23 +60,23 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_rhts7"]
 radius = 5.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1620218492 groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 1
 script = ExtResource("1_tk761")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=358464175]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_06t4h")
 animation = &"Run"
 autoplay = "Idle"
 frame_progress = 0.8844995
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1246158195]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_rhts7")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2112803474]
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="AbilityManager" type="Node" parent="." unique_id=29080088]
+[node name="AbilityManager" type="Node" parent="."]
 
-[node name="AttackController" parent="AbilityManager" unique_id=1545562974 instance=ExtResource("11_n7e5a")]
+[node name="AttackController" parent="AbilityManager" instance=ExtResource("11_n7e5a")]
