@@ -1,7 +1,8 @@
 [gd_scene format=4 uid="uid://d37vd2ud41eym"]
 
 [ext_resource type="Texture2D" uid="uid://cg6m33hjtq4qh" path="res://assets/packs/0x72_DungeonTilesetII_v1.7/atlas_floor-16x16.png" id="1_f0pmd"]
-[ext_resource type="PackedScene" uid="uid://nixq5b6lm7tx" path="res://src/entities/imp/imp.tscn" id="3_imp"]
+[ext_resource type="Script" path="res://src/levels/spawner.gd" id="sp_script"]
+[ext_resource type="Resource" uid="uid://b9wave01tres" path="res://data/wave_01.tres" id="sp_wave"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dmra6"]
 texture = ExtResource("1_f0pmd")
@@ -109,5 +110,7 @@ tile_set = SubResource("TileSet_51g85")
 
 [node name="Spawned" type="Node" parent="."]
 
-[node name="Imp" parent="." instance=ExtResource("3_imp")]
-position = Vector2(231, 172)
+
+[node name="Spawner" type="Node" parent="."]
+script = ExtResource("sp_script")
+wave = ExtResource("sp_wave")

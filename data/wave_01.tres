@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b9wave01tres"]
+
+[ext_resource type="Script" path="res://src/data/wave_data.gd" id="1_wd"]
+[ext_resource type="PackedScene" uid="uid://nixq5b6lm7tx" path="res://src/entities/imp/imp.tscn" id="2_imp"]
+
+[resource]
+script = ExtResource("1_wd")
+enemy_scene = ExtResource("2_imp")
+count = 20
+interval = 1.5
+spawn_radius = 140.0
