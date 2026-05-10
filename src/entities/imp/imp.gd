@@ -1,18 +1,20 @@
 extends CharacterBody2D
 
-var max_speed = 80
+@export var max_speed: float = 80.0
+
+var _player: Node2D = null
+
 
 func _ready() -> void:
-	pass
-	
-func _process(delta: float) -> void:
-	var direction = get_direction_to_player()
-	velocity = max_speed * direction
+	_player = get_tree().get_first_node_in_group("player") as Node2D
+
+
+func _physics_process(_delta: float) -> void:
+	velocity = max_speed * _direction_to_player()
 	move_and_slide()
-	
-func get_direction_to_player():
-	var player = get_tree().get_first_node_in_group("player") as Node2D
-	if player != null:
-		# Схема с началом вектора и концом
-		return (player.global_position - global_position).normalized()
-	return Vector2.ZERO
+
+
+func _direction_to_player() -> Vector2:
+	if _player == null:
+		return Vector2.ZERO
+	return (_player.global_position - global_position).normalized()

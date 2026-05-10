@@ -4,9 +4,13 @@ config_version=5
 [application]
 
 config/name="Arsen 2D TopDown SunMax"
-run/main_scene="uid://d37vd2ud41eym"
+run/main_scene="uid://067nxrap8et"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+EventBus="*res://src/autoload/event_bus.gd"
 
 [display]
 

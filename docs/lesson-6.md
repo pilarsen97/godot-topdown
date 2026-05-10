@@ -133,3 +133,75 @@ git commit -m "lesson-6: collision layers + camera limits + cleanup"
 - Второй уровень и переход между ними (через `World.load_level(path)`).
 - Меню, паузы, очки.
 - Звуки и музыка (AudioStreamPlayer + bus).
+
+---
+
+## ⚙️ refactor/lesson-6 — World как точка входа
+
+Финальный архитектурный шаг. В наивной версии Player и Imp оба сидят
+**внутри** `Level_01.tscn`. На бумаге это нормально, но как только мы
+захотим сделать второй уровень и переходить между ними — Player умрёт
+вместе со старым уровнем.
+
+В refactor-версии:
+
+```
+World (главная сцена)
+├── Level_01           ← можно удалить и заменить на Level_02
+│   ├── Layer0 (TileMapLayer)
+│   ├── Spawned (Node)  ← сюда World кладёт стрелы/эффекты
+│   └── Imp              ← враги — часть уровня
+└── Player              ← переживает смену уровней
+```
+
+### `src/levels/world/world.gd`
+```gdscript
+extends Node
+
+@onready var _spawn_container: Node = $Level_01/Spawned
+
+
+func _ready() -> void:
+    EventBus.spawn_in_level_requested.connect(_on_spawn_requested)
+
+
+func _on_spawn_requested(scene: PackedScene, world_position: Vector2) -> void:
+    if _spawn_container == null or scene == null:
+        return
+    var instance := scene.instantiate() as Node2D
+    _spawn_container.add_child(instance)
+    instance.global_position = world_position
+```
+
+### `world.tscn`
+- Корень `Node` со скриптом `world.gd`.
+- `Level_01` инстансом.
+- `Player` инстансом **рядом с уровнем**, не внутри.
+
+### Что поменяли в `level_01.tscn`
+- Убрали Player (теперь он живёт в World).
+- Добавили пустой `Spawned` (Node) — контейнер для атак.
+- Imp остался в уровне (он часть конкретной локации).
+
+### Главная сцена
+В `project.godot`: `run/main_scene = world.tscn`.
+
+### Демонстрация на доске
+```
+   AttackController                      World
+         │                                 │
+         │ EventBus.spawn_in_level_requested
+         └────────────►  📢  ──────────────┘
+                                            │
+                                            ▼
+                                  Level_01/Spawned
+                                    ← attack здесь
+```
+
+Вот теперь архитектура «правильная»:
+- никто не знает про чужие узлы,
+- любой объект может попросить мир заспавнить себя,
+- Player переживает смену уровня,
+- враги/декорации — часть уровня и удаляются вместе с ним.
+
+С такой базой можно делать настоящие игры, а не только демо.
